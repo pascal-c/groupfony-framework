@@ -1,5 +1,5 @@
 <?php
-namespace Groupfony\Framework ;
+namespace Groupfony\Framework;
 
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\HttpFoundation\Request;

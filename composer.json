@@ -1,4 +1,9 @@
 {
+    "name": "groupfony/framework",
+    "type": "library",
+    "description": "A lightweight php framework based on Symfony Components",
+    "license": "MIT",
+    
     "require": {
         "symfony/routing":              "2.6.*",
         "symfony/yaml":                 "2.6.*",
@@ -6,5 +11,10 @@
         "symfony/http-kernel":          "2.6.*",
         "symfony/config":               "2.6.*",
         "symfony/dependency-injection": "2.6.*"
-    }
+    },
+    
+    "autoload": {
+        "psr-0": { "Groupfony\\Framework\\": "" }
+    },
+    "target-dir": "Groupfony/Framework"
 }
