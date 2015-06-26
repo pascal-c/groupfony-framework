@@ -39,6 +39,13 @@ class Application implements HttpKernelInterface
         return $container;
     }
     
+    /** set a class and a method that will be called before the execution of the controller action
+     * When the given method returns an instance of Symfony\Component\HttpFoundation\Response or false
+     * the controller will not be called and the response will be returned directly
+     * 
+     * @param string $class
+     * @param string $method
+     */
     public function setBefore($class, $method) {
         $this->beforeClass = $class;
         $this->beforeMethod = $method;
