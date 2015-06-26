@@ -51,6 +51,10 @@ class Application implements HttpKernelInterface
         $this->beforeMethod = $method;
     }
     
+    /** returns the service container for this app
+     * 
+     * @return Symfony\Component\DependencyInjection\ContainerBuilder
+     */
     public function getContainer() {
         return $this->container;
     }
