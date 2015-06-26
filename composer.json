@@ -2,6 +2,7 @@
     "name": "groupfony/framework",
     "type": "library",
     "description": "A lightweight php framework based on Symfony Components",
+    "homepage": "https://github.com/pascal-c/groupfony-framework",
     "license": "MIT",
     
     "require": {
