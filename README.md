@@ -33,6 +33,7 @@ web/
     index.php
     .htaccess
 bootstrap.php
+composer.json
 ```
 
 ### web/.htaccess
@@ -53,9 +54,11 @@ require_once __DIR__ . '/../bootstrap.php';
 $app->run();
 ```
 ### bootstrap.php
+The setBefore method will be called before execution of controller action. 
+If it returns a Symfony\Component\HttpFoundation\Response or false, the controller action will NOT be executed and the response will be send directly to the client. The before-method will be injected with services and Request in the same way as described as the controller actions. (see section below)
 ```PHP
 <?php
-// bootstrap.php
+// bootstrap.php - example
 use \Groupfony\Framework\Application;
 
 // init Application - $configDir path to config dir, 
@@ -129,4 +132,89 @@ list:
 ```
 ## Usage
 ### Controller
+#### Service Injection 
+The main goal of this framework is to get rid of the usage of a service container everywhere. I want the framework to inject services to my controller actions automatically:
+```PHP
+use Doctrine\ORM\EntityManager;
+
+public function listAction(EntityManager $entityManager) {
+    // get something from db...
+}
+```
+You just have to type hint your parameter and the framework will pass the conveniont service for you.
+The type hint can also be a subclass the given service class. It is recommended to use the service name (as defined in services.yml) as parameter name for performance and clarity reasons. You can also let inject your constructor:
+```PHP
+use Doctrine\ORM\EntityManager;
+
+private $entityManager;
+public function __construct(EntityManager $entityManager) {
+    $this->entityManager = $entityManager;
+}
+```
+
+#### Parameter Injection
+All placeholders and all parameters from the defaults-array defined in routes.yml will be injected as well:
+```PHP
+use Doctrine\ORM\EntityManager;
+
+public function listAction(EntityManager $entityManager, $id) {
+    // get something with id $id from db...
+}
+```
+#### Request Injection
+And, like in Symfony, you can get the Request by the type hint:
+```PHP
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\Request;
+
+public function listAction(EntityManager $entityManager, $id, Request $request) {
+    // get something with id $id and some query parameters from db...
+}
+```
+
+#### Service Parameter Injection
+You can also get serviceParameters, just by name:
+```PHP
+public function listAction($devMode) {
+    // devMode was defined as a serviceParameter in services.yml
+}
+```
+
+#### Possible return values
+Your controller can return an instance of Symfony\Component\HttpFoundation\Response or simply a string.
+The framework will convert it to a Response for you.
+```PHP
+use Symfony\Component\HttpFoundation\Response;
+
+public function listAction() {
+    return 'Hello World';
+}
+```
+
+See [Symfony Documentation of HttpFoundation](http://symfony.com/doc/current/components/http_foundation/introduction.html) for more Details about Request and Response classes.
+
 ### Testing
+You can use Groupfony\Framework\FunctionalTestCase.php to write functional tests.
+You have to immplement the createApplication method like here:
+
+```PHP
+<?php
+
+use Symfony\Component\HttpKernel\HttpKernel;
+use Groupfony\Framework\FunctionalTestCase;
+
+abstract class GroupfonyTestCase extends FunctionalTestCase
+{
+    /**
+     * Creates the application.
+     *
+     * @return HttpKernel
+     */
+    public function createApplication() {
+        $app = require __DIR__ . "/../bootstrap.php";
+        return $app;
+    }
+
+}
+```
+See the [Silex Documentation about Testing](http://silex.sensiolabs.org/doc/testing.html) for more information about unit tests and functional tests.
