@@ -77,7 +77,7 @@ return $app;
 Here is an example of a services.yml file. (No other file formats are supported.)
 Groupfony Framework comes with no other components than the components needed by the framework itself.
 As you see, you can easily include services like doctrine or twig. You also have to add them to your composer.json, of cause.
-See [Symfony Documentation](http://symfony.com/doc/current/components/dependency_injection/introduction.html#setting-up-the-container-with-configuration-files) for more information of how to configure this file.
+See [Symfony Documentation](http://symfony.com/doc/current/components/dependency_injection/introduction.html#setting-up-the-container-with-configuration-files) for more information about how to configure this file.
 ```YAML
 parameters:
     devMode:      true
@@ -113,6 +113,19 @@ services:
         class: Twig_Environment
         arguments: [@twig.loader, {cache: false}]
     twig: "@twig.environment"
+```
+Here is an example of a convenient composer.json file:
+```JSON
+{
+    "require": {
+        "groupfony/framework":          "~0.1",
+        
+        "doctrine/orm":                 "2.5.*",
+        "swiftmailer/swiftmailer":      "5.*",
+        "twig/twig":                    "~1.18"
+        
+    }
+}
 ```
 
 ### config/routing.yml
@@ -216,6 +229,16 @@ abstract class GroupfonyTestCase extends FunctionalTestCase
         return $app;
     }
 
+}
+```
+You will have to add this to your composer.json to use it:
+```JSON
+{
+    "require-dev": {
+        "phpunit/phpunit":              "4.6.8",
+        "symfony/css-selector":         "~2.7",
+        "symfony/browser-kit":          "~2.7"
+    }
 }
 ```
 See the [Silex Documentation about Testing](http://silex.sensiolabs.org/doc/testing.html) for more information about unit tests and functional tests.
