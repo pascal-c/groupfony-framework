@@ -19,8 +19,24 @@ via Composer. Add this to your composer.json file:
 ```
 
 ## Configuration
+Your directory structure should look a little bit like this:
+```
+App/
+   Controller
+   ...
+config/
+    services.yml
+    routing.yml
+vendor/
+    ...
+web/
+    index.php
+    .htaccess
+bootstrap.php
+```
+
 ### web/.htaccess
-Put an .htaccess file to your desired web directory for redirectino to index.php. For Apache>=2.2.16 you can use
+Put an .htaccess file to your desired web directory for redirection to index.php. For Apache>=2.2.16 you can use
 ```htaccess
 FallbackResource /path/to/your/web-folder/index.php
 ```
@@ -57,14 +73,13 @@ return $app;
 ### config/services.yml
 Here is an example of a services.yml file. (No other file formats are supported.)
 Groupfony Framework comes with no other components than the components needed by the framework itself.
-As you see, you can easily include doctrine or twig. You also have to add them to your composer.json, of cause.
+As you see, you can easily include services like doctrine or twig. You also have to add them to your composer.json, of cause.
 See [Symfony Documentation](http://symfony.com/doc/current/components/dependency_injection/introduction.html#setting-up-the-container-with-configuration-files) for more information of how to configure this file.
 ```YAML
 parameters:
     devMode:      true
     basePath:     "to be set by bootstrap"
     cachePath:    "%basePath%/cache"
-    baseUrl:      "/groupfony/calendar/Groupfony/Calendar/web"
     
     twig.templatePath:  "%basePath%/Views"
     twig.cachePath:     "%cachePath%/twig"
