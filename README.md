@@ -3,10 +3,10 @@ A lightweight php framework based on Symfony Components
 
 ## Main goals
 1. for small and medium sized projects
-2. I wanted controller actions to be automatically injected with services by Type Hinting the parameters.  
-See Usage->Controller Section for details.
+2. I wanted controller actions to be automatically injected with services by type hinting the parameters. See Usage->Controller Section for details.
 
-Groupfony Framewok is inspirated by [Silex](http://silex.sensiolabs.org/), but takes more usage of Symfony Components, especially the Routing and Dependency Injection Components.
+Groupfony Framewok is inspirated by [Silex](http://silex.sensiolabs.org/), but takes more usage of Symfony Components, especially the Routing and Dependency Injection Components.  
+It is designed for the Groupfony project, that will offer different components for group communication (group management, mailing lists, cms, calendar, etc.). These components can be used independently and will communicate with each other in a service orientated architecture. So the framework might come with some support for web hooks in future versions.
 
 ## Installation
 via Composer. Add this to your composer.json file:
