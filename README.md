@@ -142,7 +142,7 @@ public function listAction(EntityManager $entityManager) {
 }
 ```
 You just have to type hint your parameter and the framework will pass the conveniont service for you.
-The type hint can also be a subclass the given service class. It is recommended to use the service name (as defined in services.yml) as parameter name for performance and clarity reasons. You can also let inject your constructor:
+The type hint can also be a subclass of the given service class. It is recommended to use the service name (as defined in services.yml) as parameter name for performance and clarity reasons. You can also let inject your constructor:
 ```PHP
 use Doctrine\ORM\EntityManager;
 
@@ -157,6 +157,7 @@ All placeholders and all parameters from the defaults-array defined in routes.ym
 ```PHP
 use Doctrine\ORM\EntityManager;
 
+// route: /events/{id}/{otherPlaceholder}
 public function listAction(EntityManager $entityManager, $id) {
     // get something with id $id from db...
 }
