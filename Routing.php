@@ -31,7 +31,7 @@ class Routing {
      * @return Response
      */
     public function run(Request $request, $beforeClass=null, $beforeMethod=null) {
-        $routeParameters = $this->matchRoute($this->getRoutePath());
+        $routeParameters = $this->matchRoute($this->getRoutePath($request));
         list($controllerClassName, $action) = explode('::', $routeParameters['_controller'] );
         
         $serviceInjection = new ServiceInjection($this->container, $request);
@@ -44,8 +44,8 @@ class Routing {
         return $serviceInjection->run($controllerClassName, $action, $routeParameters, true);
     }
     
-    private function getRoutePath() {
-        return $this->requestContext->getBaseUrl()->getPathInfo();
+    private function getRoutePath(Request $request) {
+        return $request->getPathInfo();
     }
     
     private function matchRoute($routePath) {

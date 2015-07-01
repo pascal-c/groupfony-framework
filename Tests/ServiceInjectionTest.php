@@ -7,7 +7,6 @@ use Groupfony\Framework\ServiceInjection;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * A Controller Class for Testing 
  *
  * @author pascal
  */
@@ -17,6 +16,7 @@ class ServiceInjectionTest  extends \PHPUnit_Framework_TestCase {
     {
         $container = new ContainerBuilder();
         $container->register('serviceSub', "\\Groupfony\\Framework\\Tests\\ServiceSub");
+        $container->setParameter('baseUrl', '/home');
         $_GET['some'] = 'foo';
         $serviceInjection = new ServiceInjection($container, Request::createFromGlobals());
         

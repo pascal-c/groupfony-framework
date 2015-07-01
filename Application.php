@@ -76,7 +76,9 @@ class Application implements HttpKernelInterface
      * @return Response
      */
     public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true) {
-        $routing = new Routing(new RequestContext($request), $this->container);
+        $requestContext = new RequestContext();
+        $requestContext->fromRequest($request);
+        $routing = new Routing($requestContext, $this->container);
         $response = $routing->run($request, $this->beforeClass, $this->beforeMethod);
         if (!$response instanceof Response) {
             $response = Response::create($response);
