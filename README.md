@@ -2,9 +2,9 @@
 A lightweight php framework based on Symfony Components
 
 ## Main goals
-1. for small and medium sized projects
-2. I wanted controller actions to be automatically injected with services by type hinting the parameters. See Usage->Controller Section for details.
-
+The main goal of this framework is to get rid of the usage of service containers. I want controller actions to be automatically injected with services by type hinting the parameters. In Symfony, it is possible to inject your controller constructor method by defining your controller as a service. So, each time you need a new service, you have to edit your routing file. It is not possible to inject other methods than the constructor. I want all my controller methods to be injected automatically with the suiting service.  
+See [Usage->Controller Section](#service_injection) for usage of Dependency Injection in Groupfony Framework.
+ 
 Groupfony Framewok is inspirated by [Silex](http://silex.sensiolabs.org/), but takes more usage of Symfony Components, especially the Routing and Dependency Injection Components.  
 It is designed for the Groupfony project, that will offer different components for group communication (group management, mailing lists, cms, calendar, etc.). These components can be used independently and will communicate with each other in a service orientated architecture. So the framework might come with some support for web hooks in future versions.
 
@@ -145,7 +145,7 @@ list:
 ```
 ## Usage
 ### Controller
-#### Service Injection 
+#### <a name="service_injection"></a>Service Injection 
 The main goal of this framework is to get rid of the usage of a service container everywhere. I want the framework to inject services to my controller actions automatically:
 ```PHP
 use Doctrine\ORM\EntityManager;
@@ -154,7 +154,7 @@ public function listAction(EntityManager $entityManager) {
     // get something from db...
 }
 ```
-You just have to type hint your parameter and the framework will pass the conveniont service for you.
+You just have to type hint your parameter and the framework will pass the convenient service for you.
 The type hint can also be a subclass of the given service class. It is recommended to use the service name (as defined in services.yml) as parameter name for performance and clarity reasons. You can also let inject your constructor:
 ```PHP
 use Doctrine\ORM\EntityManager;
