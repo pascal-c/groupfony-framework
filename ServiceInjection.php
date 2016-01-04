@@ -3,6 +3,7 @@ namespace Groupfony\Framework;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * injects method calls with the service of the container by comparing the class of the type hint with service class name
